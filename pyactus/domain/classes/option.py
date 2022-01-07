@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -54,10 +56,10 @@ class Option():
     non_performing_date : datetime.datetime
     
     # Grace Period :: If real payment happens after scheduled payment date plus GRP, then the payment is in delay.
-    grace_period : Period
+    grace_period : primitives.Period
     
     # Delinquency Period :: If real payment happens after scheduled payment date plus DLP, then the counterparty is in technical default. This means that the creditor legally has the right to declare default of the debtor.
-    delinquency_period : Period
+    delinquency_period : primitives.Period
     
     # Delinquency Rate :: Rate at which Delinquency Payments accrue on NT (in addition to the interest rate) during the DelinquencyPeriod
     delinquency_rate : float
@@ -105,7 +107,7 @@ class Option():
     cycle_anchor_date_of_optionality : datetime.datetime
     
     # Cycle Of Optionality :: Cycle according to which the option exercise date schedule will be calculated.OPCL can be NULL for American Options or Prepayment Optionality in which case the optionality period starts at OPANX and ends at OPXED (for american options) or MD (in case of prepayment optionality).The interval will be adjusted yet by EOMC and BDC.
-    cycle_of_optionality : Cycle
+    cycle_of_optionality : primitives.Cycle
     
     # Exercise Date :: Date of exercising a contingent event/obligation such as a forward condition, optionality etc. The Exercise date marks the observed timestamp of fixing the contingent event and respective payment obligation not necessarily the timestamp of settling the obligation.
     exercise_date : datetime.datetime
@@ -114,7 +116,7 @@ class Option():
     exercise_amount : float
     
     # Settlement Period :: Defines the period from fixing of a contingent event/obligation (Exercise Date) to settlement of the obligation.
-    settlement_period : Period
+    settlement_period : primitives.Period
     
     # Delivery Settlement :: Indicates whether the contract is settled in cash or physical delivery.In case of physical delivery, the underlying contract and associated (future) cash flows are effectively exchanged. In case of cash settlement, the current market value of the underlying contract determines the cash flow exchanged.
     delivery_settlement : enums.DeliverySettlement

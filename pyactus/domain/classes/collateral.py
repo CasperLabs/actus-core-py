@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -60,4 +62,4 @@ class Collateral():
     exercise_amount : float
     
     # Settlement Period :: Defines the period from fixing of a contingent event/obligation (Exercise Date) to settlement of the obligation.
-    settlement_period : Period
+    settlement_period : primitives.Period

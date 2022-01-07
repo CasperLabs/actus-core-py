@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -51,13 +53,13 @@ class PrincipalAtMaturity():
     non_performing_date : datetime.datetime
     
     # Prepayment Period :: If real payment happens before scheduled payment date minus PPP, then it is considered a prepayment. Effect of prepayments are further described in PPEF and related fields.
-    prepayment_period : Period
+    prepayment_period : primitives.Period
     
     # Grace Period :: If real payment happens after scheduled payment date plus GRP, then the payment is in delay.
-    grace_period : Period
+    grace_period : primitives.Period
     
     # Delinquency Period :: If real payment happens after scheduled payment date plus DLP, then the counterparty is in technical default. This means that the creditor legally has the right to declare default of the debtor.
-    delinquency_period : Period
+    delinquency_period : primitives.Period
     
     # Delinquency Rate :: Rate at which Delinquency Payments accrue on NT (in addition to the interest rate) during the DelinquencyPeriod
     delinquency_rate : float
@@ -66,7 +68,7 @@ class PrincipalAtMaturity():
     cycle_anchor_date_of_fee : datetime.datetime
     
     # Cycle Of Fee :: Defines in combination with FEANX the payment points of fees
-    cycle_of_fee : Cycle
+    cycle_of_fee : primitives.Cycle
     
     # Fee Basis :: Basis, on which Fee is calculated. For FEB=’A’, FER is interpreted as an absolute amount to be paid at every FP event and for FEB=’N’, FER represents a rate at which FP amounts accrue on the basis of the contract’s NT.
     fee_basis : enums.FeeBasis
@@ -81,7 +83,7 @@ class PrincipalAtMaturity():
     cycle_anchor_date_of_interest_payment : datetime.datetime
     
     # Cycle Of Interest Payment :: Cycle according to which the interest payment date schedule will be calculated.In case IPCL is not set, then there will only be an interest payment event at MD (and possibly at IPANX if set).The interval will be adjusted yet by EOMC and BDC.
-    cycle_of_interest_payment : Cycle
+    cycle_of_interest_payment : primitives.Cycle
     
     # Nominal Interest Rate :: The nominal interest rate which will be used to calculate accruals and the next interest payment at the next IP date. NT multiplied with IPNR is the base for the interest payment calculation. The relevant time period is a function of IPDC. If the contract is variable (RRANX set) this field is periodically updated per SD. In the case of plan vanilla interest rate swaps (IRSPV) this defines the rate of fixed leg.
     nominal_interest_rate : float
@@ -147,7 +149,7 @@ class PrincipalAtMaturity():
     cycle_anchor_date_of_scaling_index : datetime.datetime
     
     # Cycle Of Scaling Index :: Cycle according to which the scaling date schedule will be calculated.In case SCCL is not set, then there will only be one scaling event at SCANX given SCANX is set.The interval will be adjusted yet by EOMC and BDC.
-    cycle_of_scaling_index : Cycle
+    cycle_of_scaling_index : primitives.Cycle
     
     # Scaling Effect :: Indicates which payments are scaled. I = Interest payments, N = Nominal payments and M = Maximum deferred interest amount. They can be scaled in any combination.
     scaling_effect : enums.ScalingEffect
@@ -162,7 +164,7 @@ class PrincipalAtMaturity():
     cycle_anchor_date_of_optionality : datetime.datetime
     
     # Cycle Of Optionality :: Cycle according to which the option exercise date schedule will be calculated.OPCL can be NULL for American Options or Prepayment Optionality in which case the optionality period starts at OPANX and ends at OPXED (for american options) or MD (in case of prepayment optionality).The interval will be adjusted yet by EOMC and BDC.
-    cycle_of_optionality : Cycle
+    cycle_of_optionality : primitives.Cycle
     
     # Penalty Type :: Defines whether prepayment is linked to a penalty and of which kind.
     penalty_type : enums.PenaltyType
@@ -177,7 +179,7 @@ class PrincipalAtMaturity():
     cycle_anchor_date_of_rate_reset : datetime.datetime
     
     # Cycle Of Rate Reset :: Cycle according to which the rate reset date schedule will be calculated.In case RRCL is not set, then there will only be one rate reset event at RRANX given RRANX if set.The interval will be adjusted yet by EOMC and BDC.
-    cycle_of_rate_reset : Cycle
+    cycle_of_rate_reset : primitives.Cycle
     
     # Rate Spread :: Interest rate spread. A typical rate resetting rule is LIBOR plus x basis point where x represents the interest rate spread.  The following equation can be taken if RRMLT is not set: IPNR after rate reset = Rate selected from the market object  + RRSP.
     rate_spread : float
@@ -201,7 +203,7 @@ class PrincipalAtMaturity():
     cycle_point_of_rate_reset : enums.CyclePointOfRateReset
     
     # Fixing Period :: Interest rate resets (adjustments) are usually fixed one or two days (usually Business Days) before the new rate applies (defined by the rate reset schedule). This field holds the period between fixing and application of a rate.
-    fixing_period : Period
+    fixing_period : primitives.Period
     
     # Next Reset Rate :: Holds the new rate that has been fixed already (cf. attribute FixingDays) but not applied. This new rate will be applied at the next rate reset event (after SD and according to the rate reset schedule). Attention, RRNXT must be set to NULL after it is applied!
     next_reset_rate : float

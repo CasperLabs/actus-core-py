@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -45,10 +47,10 @@ class Swap():
     non_performing_date : datetime.datetime
     
     # Grace Period :: If real payment happens after scheduled payment date plus GRP, then the payment is in delay.
-    grace_period : Period
+    grace_period : primitives.Period
     
     # Delinquency Period :: If real payment happens after scheduled payment date plus DLP, then the counterparty is in technical default. This means that the creditor legally has the right to declare default of the debtor.
-    delinquency_period : Period
+    delinquency_period : primitives.Period
     
     # Delinquency Rate :: Rate at which Delinquency Payments accrue on NT (in addition to the interest rate) during the DelinquencyPeriod
     delinquency_rate : float

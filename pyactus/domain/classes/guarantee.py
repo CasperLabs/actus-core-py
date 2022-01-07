@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -48,10 +50,10 @@ class Guarantee():
     non_performing_date : datetime.datetime
     
     # Grace Period :: If real payment happens after scheduled payment date plus GRP, then the payment is in delay.
-    grace_period : Period
+    grace_period : primitives.Period
     
     # Delinquency Period :: If real payment happens after scheduled payment date plus DLP, then the counterparty is in technical default. This means that the creditor legally has the right to declare default of the debtor.
-    delinquency_period : Period
+    delinquency_period : primitives.Period
     
     # Delinquency Rate :: Rate at which Delinquency Payments accrue on NT (in addition to the interest rate) during the DelinquencyPeriod
     delinquency_rate : float
@@ -69,7 +71,7 @@ class Guarantee():
     cycle_anchor_date_of_fee : datetime.datetime
     
     # Cycle Of Fee :: Defines in combination with FEANX the payment points of fees
-    cycle_of_fee : Cycle
+    cycle_of_fee : primitives.Cycle
     
     # Fee Basis :: Basis, on which Fee is calculated. For FEB=’A’, FER is interpreted as an absolute amount to be paid at every FP event and for FEB=’N’, FER represents a rate at which FP amounts accrue on the basis of the contract’s NT.
     fee_basis : enums.FeeBasis
@@ -111,7 +113,7 @@ class Guarantee():
     exercise_amount : float
     
     # Settlement Period :: Defines the period from fixing of a contingent event/obligation (Exercise Date) to settlement of the obligation.
-    settlement_period : Period
+    settlement_period : primitives.Period
     
     # Settlement Currency :: The currency in which cash flows are settled. This currency can be different from the currency (CUR) in which cash flows or the contract, respectively, is denominated in which case the respective FX-rate applies at settlement time.If no settlement currency is defined the cash flows are settled in the currency in which they are denominated.
     settlement_currency : str

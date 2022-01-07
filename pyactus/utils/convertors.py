@@ -64,7 +64,14 @@ def to_python_type(term) -> str:
         return "str"
     elif term.type == "Timestamp":
         return "datetime.datetime"
+    elif term.type == "ContractReference":
+        return "primitives.ContractReference"
+    elif term.type == "ContractReference[]":
+        return "typing.List[primitives.ContractReference]"
     elif term.type == "Enum":
         return f"enums.{to_camel_case(term.identifier)}"
+    elif term.type == "Enum[]":
+        return f"typing.List[enums.{to_camel_case(term.identifier)}]"
 
-    return term.type
+    raise ValueError(term.type)
+    return f"xxx-{term.type}"

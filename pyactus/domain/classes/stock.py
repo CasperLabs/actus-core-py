@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -54,7 +56,7 @@ class Stock():
     cycle_anchor_date_of_dividend : datetime.datetime
     
     # Cycle Of Dividend :: Defines in combination with DVANX the payment points of dividends. The dividend payment schedule will start at DVANX and end at MaximumProjectionPeriod (cf. sheet Modeling Parameters).
-    cycle_of_dividend : Cycle
+    cycle_of_dividend : primitives.Cycle
     
     # Next Dividend Payment Amount :: Defines the next dividend payment (amount) whereas the date of dividend payment is defined through the DVANX/DVCL pair. If DVCL is defined, then this amount will be used as dividend payment for each future dividend payment date.
     next_dividend_payment_amount : float

@@ -1,6 +1,8 @@
 import dataclasses
 import datetime
+
 from pyactus.domain import enums
+from pyactus.domain import primitives
 
 
 @dataclasses.dataclass
@@ -54,10 +56,10 @@ class Future():
     non_performing_date : datetime.datetime
     
     # Grace Period :: If real payment happens after scheduled payment date plus GRP, then the payment is in delay.
-    grace_period : Period
+    grace_period : primitives.Period
     
     # Delinquency Period :: If real payment happens after scheduled payment date plus DLP, then the counterparty is in technical default. This means that the creditor legally has the right to declare default of the debtor.
-    delinquency_period : Period
+    delinquency_period : primitives.Period
     
     # Delinquency Rate :: Rate at which Delinquency Payments accrue on NT (in addition to the interest rate) during the DelinquencyPeriod
     delinquency_rate : float
@@ -78,7 +80,7 @@ class Future():
     cycle_anchor_date_of_margining : datetime.datetime
     
     # Cycle Of Margining :: Defines together with MRANX the points where margins can be called.
-    cycle_of_margining : Cycle
+    cycle_of_margining : primitives.Cycle
     
     # Variation Margin :: MRVM reflects the accrued but not yet paid margin as per SD.  Open traded positions are revalued by the exchange at the end of every trading day using mark-to-market valuation. Often clearing members do not credit or debit their clients daily with MRVM, but rather use a Maintenance Margin. If the balance falls outside MRMML (and MRMMU), then  capital must be added (is refunded) to reach the original margin amount MRIM. We can also say that MVO+MRVM is equal to the reference value as per last margin update.
     variation_margin : float
@@ -114,7 +116,7 @@ class Future():
     exercise_amount : float
     
     # Settlement Period :: Defines the period from fixing of a contingent event/obligation (Exercise Date) to settlement of the obligation.
-    settlement_period : Period
+    settlement_period : primitives.Period
     
     # Delivery Settlement :: Indicates whether the contract is settled in cash or physical delivery.In case of physical delivery, the underlying contract and associated (future) cash flows are effectively exchanged. In case of cash settlement, the current market value of the underlying contract determines the cash flow exchanged.
     delivery_settlement : enums.DeliverySettlement
